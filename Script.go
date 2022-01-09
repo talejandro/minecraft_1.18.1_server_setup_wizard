@@ -64,7 +64,7 @@ func verification() {
 func lectura(linea, parametro string) {
 
 	//Con esta funcion voy a una linea en especidico y la modifico, aca depende de las variables que defini arriba
-	fileconfig := "server.propities"
+	fileconfig := "server.properties"
 	input, err := ioutil.ReadFile(fileconfig)
 	if err != nil {
 		log.Fatalln(err)
@@ -94,20 +94,113 @@ func setup() {
 		fmt.Println("1. Name")
 		fmt.Println("2. Game mode")
 		fmt.Println("3. Difficulty")
-		fmt.Println("4. Pvp")
-		fmt.Println("5. Server port")
-		fmt.Println("6. View Distance")
-		fmt.Println("7. Simulation Distance")
-		fmt.Println("8. Hardcore mode")
-		fmt.Println("9. Premium mode")
-		fmt.Println("10. Menu")
+		fmt.Println("4. Premium mode")
+		fmt.Println("5. Pvp")
+		fmt.Println("6. Server port")
+		fmt.Println("7. View Distance")
+		fmt.Println("8. Simulation Distance")
+		fmt.Println("9. Hardcore mode")
+		fmt.Println("0. Menu")
 		fmt.Printf("Insert an option :")
 		fmt.Scanln(&setupmenu)
 
+		switch setupmenu {
+		case "1":
+			clear()
+			fmt.Println("Enter name server.")
+			fmt.Println("Name: ")
+			var nname string
+			fmt.Scanln(&nname) //Aca hay que buscar la forma de que si se inserta un nombre con espacio se guarde en la variable.
+			nname = "motd=" + nname
+			lectura("motd=", nname)
+
+		case "2":
+			clear()
+			fmt.Println("Enter gamemode.")
+			fmt.Println("(spectator) (survival) (creative) (adventure) : ")
+			var ngame string
+			fmt.Scanln(&ngame)
+			ngame = "gamemode=" + ngame
+			lectura("gamemode=", ngame)
+		case "3":
+			clear()
+			fmt.Println("Enter difficulty.")
+			fmt.Println("(hard) (normal) (easy) : ")
+			var ndiff string
+			fmt.Scanln(&ndiff)
+			ndiff = "difficulty=" + ndiff
+			lectura("difficulty=", ndiff)
+
+		case "4":
+			clear()
+			fmt.Println("Premium mode?")
+			fmt.Println("(true) (false): ")
+			var nprem string
+			fmt.Scanln(&nprem)
+			nprem = "online-mode=" + nprem
+			lectura("online-mode=", nprem)
+
+		case "5":
+			clear()
+			fmt.Println("Player vs Player.")
+			fmt.Println("(true) (false): ")
+			var npvp string
+			fmt.Scanln(&npvp)
+			npvp = "pvp=" + npvp
+			lectura("pvp=", npvp)
+
+		case "6":
+			clear()
+			fmt.Println("Enter port.")
+			fmt.Println("(default: 25565):")
+			var nport string
+			fmt.Scanln(&nport)
+			nport = "server-port=" + nport
+			lectura("server-port=", nport)
+
+		case "7":
+			clear()
+			fmt.Println("Enter view distance.")
+			fmt.Println("(Chunks Number):")
+			var nchun string
+			fmt.Scanln(&nchun)
+			nchun = "view-distance=" + nchun
+			lectura("view-distance=", nchun)
+
+		case "8":
+			clear()
+			fmt.Println("Enter simulation distance.")
+			fmt.Println("(Chunks Number):")
+			var nsimu string
+			fmt.Scanln(&nsimu)
+			nsimu = "simulation-distance=" + nsimu
+			lectura("simulation-distance=", nsimu)
+
+		case "9":
+			clear()
+			fmt.Println("Hardcore mode.")
+			fmt.Println("(true) (false):")
+			var nhard string
+			fmt.Scanln(&nhard)
+			nhard = "hardcore=" + nhard
+			lectura("hardcore=", nhard)
+
+		case "0":
+		default:
+			clear()
+			fmt.Println(setupmenu, "is't an option, try again!")
+			time.Sleep(2 * time.Second)
+		}
+
 	}
+}
 
-	lectura("nombre=", "este es mi nombre")
-
+func server() {
+	cmd := exec.Command("java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar")
+	cmd.Stdout = os.Stdout
+	cmd.Stdin = os.Stdin
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }
 
 func main() {
@@ -127,16 +220,19 @@ func main() {
 		switch menu {
 		case "1":
 			verification()
+			clear()
 			fmt.Println("Task completed successfully! Going back to the main menu")
-			time.Sleep(1 * time.Second)
+			time.Sleep(2 * time.Second)
 			clear()
 		case "2":
 			clear()
 			setup()
+			clear()
 			fmt.Println("Setup completed successfully! Going back to the main menu")
-			time.Sleep(1 * time.Second)
+			time.Sleep(2 * time.Second)
 			clear()
 		case "3":
+			server()
 		case "0":
 			clear()
 			fmt.Println("Bye! :)")
