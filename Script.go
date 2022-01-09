@@ -11,6 +11,8 @@ func welcome() {
 	fmt.Println("By Talejandro")
 	time.Sleep(1 * time.Second)
 
+	//clear
+
 }
 func main() {
 	welcome()
