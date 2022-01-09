@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 )
 
@@ -60,9 +61,53 @@ func verification() {
 	time.Sleep(1 * time.Second)
 }
 
-func setup() {
+func lectura(linea, parametro string) {
 
+	//Con esta funcion voy a una linea en especidico y la modifico, aca depende de las variables que defini arriba
+	fileconfig := "server.propities"
+	input, err := ioutil.ReadFile(fileconfig)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	lines := strings.Split(string(input), "\n")
+	for i, line := range lines {
+		if strings.Contains(line, linea) {
+			lines[i] = parametro
+		}
+	}
+	output := strings.Join(lines, "\n")
+	err = ioutil.WriteFile(fileconfig, []byte(output), 0644)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+}
+
+func setup() {
 	//Cambiar Archivo Server.Propieties
+	var setupmenu string
+
+	for setupmenu != "0" {
+		clear()
+		fmt.Println("Setup")
+		fmt.Println("1. Name")
+		fmt.Println("2. Game mode")
+		fmt.Println("3. Difficulty")
+		fmt.Println("4. Pvp")
+		fmt.Println("5. Server port")
+		fmt.Println("6. View Distance")
+		fmt.Println("7. Simulation Distance")
+		fmt.Println("8. Hardcore mode")
+		fmt.Println("9. Premium mode")
+		fmt.Println("10. Menu")
+		fmt.Printf("Insert an option :")
+		fmt.Scanln(&setupmenu)
+
+	}
+
+	lectura("nombre=", "este es mi nombre")
+
 }
 
 func main() {
