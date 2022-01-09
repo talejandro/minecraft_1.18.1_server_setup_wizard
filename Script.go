@@ -196,7 +196,31 @@ func setup() {
 }
 
 func server() {
-	cmd := exec.Command("java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar")
+	clear()
+	fmt.Println("Run Server")
+	time.Sleep(1 * time.Second)
+	fmt.Println("Enter number in M (ex: 3072M): ")
+	var cream string
+	var xmx string
+	var xms string
+	fmt.Scan(&cream)
+	xmx = "-Xmx" + cream + "M"
+	xms = "-Xms" + cream + "M"
+	fmt.Println("Attention!!!, you will enter on the server administration console.")
+	clear()
+	fmt.Println("To stop it press Crtl + C")
+	time.Sleep(1 * time.Second)
+	fmt.Println("-----Remember connect to ........-----")
+	time.Sleep(1 * time.Second)
+	fmt.Println("The server stars, in...")
+	time.Sleep(1 * time.Second)
+	fmt.Println("3...")
+	time.Sleep(1 * time.Second)
+	fmt.Println("2...")
+	time.Sleep(1 * time.Second)
+	fmt.Println("1...")
+
+	cmd := exec.Command("java", xmx, xms, "-jar", "server.jar")
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr
