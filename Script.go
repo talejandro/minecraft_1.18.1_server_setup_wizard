@@ -11,7 +11,7 @@ import (
 )
 
 func welcome() {
-	//Bienvenida al Script
+	//Welcome to the script.
 	fmt.Println("Welcome to the Minecraft Server setup wizard")
 	time.Sleep(1 * time.Second)
 	fmt.Println("By Talejandro")
@@ -20,13 +20,13 @@ func welcome() {
 }
 
 func clear() {
-	//Limpiar consola en linux.
+	//Clean console Linux.
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
 func verification() {
-	//Verificacion del archivo
+	//EULA file verification
 	clear()
 	fmt.Println("Checking EULA file")
 	time.Sleep(1 * time.Second)
@@ -42,14 +42,14 @@ func verification() {
 	}
 
 	if exis {
-		//modificamos el false por el true dentro del archivo eula.txt
+		//Eula.txt file modification.
 		aceptar := []byte("eula=true")
 		err := ioutil.WriteFile(ruta, aceptar, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
 	} else {
-		//corremos el archivo del servidor para crear el eula.txt
+		//Creation of the eula.txt file, running the server for the first time.
 		cmd := exec.Command("java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar")
 		cmd.Run()
 		aceptar := []byte("eula=true")
@@ -63,7 +63,7 @@ func verification() {
 
 func lectura(linea, parametro string) {
 
-	//Con esta funcion voy a una linea en especidico y la modifico, aca depende de las variables que defini arriba
+	//With this function I go to a specific line and modify it, here it depends on the variables that I defined above (linea and parametro).
 	fileconfig := "server.properties"
 	input, err := ioutil.ReadFile(fileconfig)
 	if err != nil {
@@ -85,7 +85,7 @@ func lectura(linea, parametro string) {
 }
 
 func setup() {
-	//Cambiar Archivo Server.Propieties
+	//Change server.properties file.
 	var setupmenu string
 
 	for setupmenu != "0" {
@@ -108,9 +108,9 @@ func setup() {
 		case "1":
 			clear()
 			fmt.Println("Enter name server.")
-			fmt.Println("Name: ")
+			fmt.Println("Name (One Word): ")
 			var nname string
-			fmt.Scanln(&nname) //Aca hay que buscar la forma de que si se inserta un nombre con espacio se guarde en la variable.
+			fmt.Scanln(&nname) //Here I have to find the way that if you insert a name with a space, it will be saved in the variable.
 			nname = "motd=" + nname
 			lectura("motd=", nname)
 
@@ -196,6 +196,7 @@ func setup() {
 }
 
 func server() {
+	// On this function I'll run the server file
 	clear()
 	fmt.Println("Run Server")
 	time.Sleep(1 * time.Second)
@@ -228,6 +229,7 @@ func server() {
 }
 
 func main() {
+	//Here is Main Menu
 	welcome()
 	var menu string
 
