@@ -200,7 +200,7 @@ func server() {
 	clear()
 	fmt.Println("Run Server")
 	time.Sleep(1 * time.Second)
-	fmt.Println("Enter number in M (ex: 3072M): ")
+	fmt.Println("Enter number in M (ex: 3072): ")
 	var cream string
 	var xmx string
 	var xms string
@@ -230,6 +230,7 @@ func server() {
 
 func main() {
 	//Here is Main Menu
+	clear()
 	welcome()
 	var menu string
 
