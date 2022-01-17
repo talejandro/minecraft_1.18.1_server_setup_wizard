@@ -1,4 +1,4 @@
-# Minecraft 1.18.1 Server Setup Wizard
+# Minecraft 1.18.1 Server Setup Wizard.
 
 This repository has a jar server to Minecraft 1.18.1 and the setup wizard script for Linux and Windows in Go.
 
