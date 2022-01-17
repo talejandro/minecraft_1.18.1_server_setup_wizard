@@ -6,7 +6,7 @@ This repository has a jar server to Minecraft 1.18.1 and the setup wizard script
 
 1. Clone the repository.
 
-2. Compile the Script on your OS.
+2. Compile the Script.
 
 3. In Linux, give run permissions to script: 
 
